@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | Scholars HUB</title>
+<meta name="description" content="Scholars HUB equips students and young professionals with entrepreneurship, leadership, innovation, and professional services in Cape Coast, Ghana.">
+
+<link rel="icon" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* --- Multi-image gallery cards --- */
+  .gallery-item-multi{display:block;cursor:pointer;padding:0 0 14px;overflow:hidden;background:#fff;border-radius:12px;grid-column:span 2;aspect-ratio:auto;}
+  .gallery-multi-preview{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;width:100%;aspect-ratio:16/9;}
+  .gallery-multi-preview.gm-preview-2{grid-template-columns:1fr 1fr;grid-template-rows:1fr;aspect-ratio:21/9;}
+  @media (max-width:700px){
+    .gallery-item-multi{grid-column:span 1;}
+    .gallery-multi-preview{aspect-ratio:4/3;}
+    .gallery-multi-preview.gm-preview-2{aspect-ratio:16/9;}
+  }
+  .gallery-multi-preview .gm-tile{position:relative;overflow:hidden;background:#e9e9e9;}
+  .gallery-multi-preview .gm-tile img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s ease;}
+  .gallery-item-multi:hover .gm-tile img{transform:scale(1.07);}
+  .gm-more-badge{position:absolute;inset:0;background:rgba(10,10,10,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3rem;font-family:'Poppins',sans-serif;}
+  .gallery-item-multi .gallery-caption{display:block;padding:12px 14px 0;position:static;background:none;color:inherit;}
+  .gallery-item-multi .gallery-caption small{display:block;font-weight:400;opacity:.65;font-size:.78rem;margin-top:2px;}
+
+  /* --- Single-photo gallery cards (replaces Font Awesome icon tiles) --- */
+  .gallery-item-photo{display:block;cursor:pointer;padding:0 0 14px;overflow:hidden;background:#fff;border-radius:12px;aspect-ratio:auto;}
+  .gallery-photo-frame{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;border-radius:12px 12px 0 0;background:#e9e9e9;}
+  .gallery-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s ease;}
+  .gallery-item-photo:hover .gallery-photo-frame img{transform:scale(1.07);}
+  .gallery-item-photo .gallery-caption{display:block;padding:12px 14px 0;position:static;background:none;color:inherit;}
+
+  /* --- Multi-image lightbox --- */
+  .gm-lightbox{position:fixed;inset:0;background:rgba(8,8,10,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:24px;}
+  .gm-lightbox.is-open{display:flex;}
+  .gm-lightbox-img{max-width:88vw;max-height:80vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .gm-lightbox-close{position:absolute;top:20px;right:28px;background:none;border:0;color:#fff;font-size:2.2rem;line-height:1;cursor:pointer;}
+  .gm-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;font-size:1.4rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .gm-lightbox-nav:hover{background:rgba(255,255,255,.25);}
+  .gm-lightbox-prev{left:18px;}
+  .gm-lightbox-next{right:18px;}
+  .gm-lightbox-caption{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;font-size:.95rem;}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img src="images/logo.jpg" alt="Scholars HUB logo" class="brand-logo">
+      <span class="brand-text">
+        <span class="brand-name">Scholars <em>HUB</em></span>
+        <span class="brand-tag">Transforming Education into Entrepreneurship</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html" class="">Home</a></li>
+        <li><a href="about.html" class="">About</a></li>
+        <li><a href="services.html" class="">Services</a></li>
+        <li><a href="projects.html" class="">Projects</a></li>
+        <li><a href="gallery.html" class="is-active">Gallery</a></li>
+        <li><a href="blog.html" class="">Blog</a></li>
+        <li><a href="contact.html" class="">Contact</a></li>
+      </ul>
+      <a href="book-service.html" class="btn btn-gold nav-cta">Book a Service</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+
+<section class="hero" style="padding:70px 0 90px;">
+  <div class="hero-ring" aria-hidden="true"></div>
+  <div class="container">
+    <div class="eyebrow">Moments &amp; Milestones</div>
+    <h1 style="color:var(--white);max-width:680px;">A look inside our workshops, training, and community work</h1>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="gallery-tabs" data-aos="fade-up">
+      <button class="filter-btn gallery-tab is-active" data-filter="all">All</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Community Projects">Community Projects</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Engineering Projects">Engineering Projects</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Student Events">Workshops</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Team Activities">Team Activities</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Training Sessions">Training Sessions</button>
+      
+      <button class="filter-btn gallery-tab" data-filter="Workshops">Student Events</button>
+      
+    </div>
+
+    <div class="gallery-grid">
+      
+      <div class="gallery-item gallery-item-photo" data-category="Workshops" data-title="Student Tech Talk Workshop" data-images='["images/workshop-1.jpg"]'
+           data-aos="fade-up" data-aos-delay="0" role="button" tabindex="0" aria-label="Open Student Tech Talk Workshop">
+        <div class="gallery-photo-frame"><img src="images/workshop-1.jpg" alt="Student Tech Talk Workshop" loading="lazy"></div>
+        <span class="gallery-caption">Student Tech Talk Workshop</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Workshops" data-title="Student Tech Talk Workshop" data-images='["images/workshop-2.jpg"]'
+           data-aos="fade-up" data-aos-delay="0" role="button" tabindex="0" aria-label="Open Student Tech Talk Workshop">
+        <div class="gallery-photo-frame"><img src="images/workshop-2.jpg" alt="Student Tech Talk Workshop" loading="lazy"></div>
+        <span class="gallery-caption">Student Tech Talk Workshop</span>
+      </div>
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Product Sampling Training" data-images='["images/train-1.jpg"]'
+           data-aos="fade-up" data-aos-delay="30" role="button" tabindex="0" aria-label="Open Product Sampling Training">
+        <div class="gallery-photo-frame"><img src="images/train-1.jpg" alt="Product Sampling Training" loading="lazy"></div>
+        <span class="gallery-caption">Product Sampling Training</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Hands-On Practical Training" data-images='["images/train-2.jpg"]'
+           data-aos="fade-up" data-aos-delay="45" role="button" tabindex="0" aria-label="Open Hands-On Practical Training">
+        <div class="gallery-photo-frame"><img src="images/train-2.jpg" alt="Hands-On Practical Training" loading="lazy"></div>
+        <span class="gallery-caption">Hands-On Practical Training</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Trainee Celebration" data-images='["images/train-3.jpg"]'
+           data-aos="fade-up" data-aos-delay="47" role="button" tabindex="0" aria-label="Open Trainee Celebration">
+        <div class="gallery-photo-frame"><img src="images/train-3.jpg" alt="Trainee Celebration" loading="lazy"></div>
+        <span class="gallery-caption">Trainee Celebration</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Branding & Design Training" data-images='["images/train-4.jpg"]'
+           data-aos="fade-up" data-aos-delay="48" role="button" tabindex="0" aria-label="Open Branding & Design Training">
+        <div class="gallery-photo-frame"><img src="images/train-4.jpg" alt="Branding & Design Training" loading="lazy"></div>
+        <span class="gallery-caption">Branding & Design Training</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Team Activities" data-title="Team Strategy Day" data-images='["images/training-03.jpg"]'
+           data-aos="fade-up" data-aos-delay="60" role="button" tabindex="0" aria-label="Open Team Strategy Day">
+        <div class="gallery-photo-frame"><img src="images/training-03.jpg" alt="Team Strategy Day" loading="lazy"></div>
+        <span class="gallery-caption">Team Strategy Day</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Community Projects" data-title="Community Clean-Up Drive" data-images='["images/eng-04.jpg"]'
+           data-aos="fade-up" data-aos-delay="90" role="button" tabindex="0" aria-label="Open Community Clean-Up Drive">
+        <div class="gallery-photo-frame"><img src="images/eng-04.jpg" alt="Community Clean-Up Drive" loading="lazy"></div>
+        <span class="gallery-caption">Community Clean-Up Drive</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Student Events" data-title="Startup Pitch Night" data-images='["images/student-01.jpg"]'
+           data-aos="fade-up" data-aos-delay="120" role="button" tabindex="0" aria-label="Open Startup Pitch Night">
+        <div class="gallery-photo-frame"><img src="images/student-01.jpg" alt="Startup Pitch Night" loading="lazy"></div>
+        <span class="gallery-caption">Startup Pitch Night</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="3D Architectural Model" data-images='["images/eng-1.jpg"]'
+           data-aos="fade-up" data-aos-delay="150" role="button" tabindex="0" aria-label="Open 3D Architectural Model">
+        <div class="gallery-photo-frame"><img src="images/eng-1.jpg" alt="3D Architectural Model" loading="lazy"></div>
+        <span class="gallery-caption">3D Architectural Model</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Factory Floor Plan Design" data-images='["images/eng-2.jpg"]'
+           data-aos="fade-up" data-aos-delay="160" role="button" tabindex="0" aria-label="Open Factory Floor Plan Design">
+        <div class="gallery-photo-frame"><img src="images/eng-2.jpg" alt="Factory Floor Plan Design" loading="lazy"></div>
+        <span class="gallery-caption">Factory Floor Plan Design</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Water Factory Building Design" data-images='["images/eng-3.jpg"]'
+           data-aos="fade-up" data-aos-delay="170" role="button" tabindex="0" aria-label="Open Water Factory Building Design">
+        <div class="gallery-photo-frame"><img src="images/eng-3.jpg" alt="Water Factory Building Design" loading="lazy"></div>
+        <span class="gallery-caption">Water Factory Building Design</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Workshops" data-title="Entrepreneurship Mindset Workshop" data-images='["images/workshop-2.jpg"]'
+           data-aos="fade-up" data-aos-delay="180" role="button" tabindex="0" aria-label="Open Entrepreneurship Mindset Workshop">
+        <div class="gallery-photo-frame"><img src="images/workshop-2.jpg" alt="Entrepreneurship Mindset Workshop" loading="lazy"></div>
+        <span class="gallery-caption">Entrepreneurship Mindset Workshop</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Custom Print Production Training" data-images='["images/train-5.jpg"]'
+           data-aos="fade-up" data-aos-delay="210" role="button" tabindex="0" aria-label="Open Custom Print Production Training">
+        <div class="gallery-photo-frame"><img src="images/train-5.jpg" alt="Custom Print Production Training" loading="lazy"></div>
+        <span class="gallery-caption">Custom Print Production Training</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Training Sessions" data-title="Apparel Branding Training" data-images='["images/train-6.jpg"]'
+           data-aos="fade-up" data-aos-delay="215" role="button" tabindex="0" aria-label="Open Apparel Branding Training">
+        <div class="gallery-photo-frame"><img src="images/train-6.jpg" alt="Apparel Branding Training" loading="lazy"></div>
+        <span class="gallery-caption">Apparel Branding Training</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Team Activities" data-title="Mentor Meet-and-Greet" data-images='["images/training-02.jpg"]'
+           data-aos="fade-up" data-aos-delay="240" role="button" tabindex="0" aria-label="Open Mentor Meet-and-Greet">
+        <div class="gallery-photo-frame"><img src="images/training-02.jpg" alt="Mentor Meet-and-Greet" loading="lazy"></div>
+        <span class="gallery-caption">Mentor Meet-and-Greet</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Community Projects" data-title="School Outreach Program" data-images='["images/eng-03.jpg"]'
+           data-aos="fade-up" data-aos-delay="270" role="button" tabindex="0" aria-label="Open School Outreach Program">
+        <div class="gallery-photo-frame"><img src="images/eng-03.jpg" alt="School Outreach Program" loading="lazy"></div>
+        <span class="gallery-caption">School Outreach Program</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Student Events" data-title="Graduation & Awards Night" data-images='["images/training-06.jpg"]'
+           data-aos="fade-up" data-aos-delay="300" role="button" tabindex="0" aria-label="Open Graduation & Awards Night">
+        <div class="gallery-photo-frame"><img src="images/training-06.jpg" alt="Graduation & Awards Night" loading="lazy"></div>
+        <span class="gallery-caption">Graduation & Awards Night</span>
+      </div>
+      
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Residential Housing Project" data-images='["images/eng-4.jpg"]'
+           data-aos="fade-up" data-aos-delay="330" role="button" tabindex="0" aria-label="Open Residential Housing Project">
+        <div class="gallery-photo-frame"><img src="images/eng-4.jpg" alt="Residential Housing Project" loading="lazy"></div>
+        <span class="gallery-caption">Residential Housing Project</span>
+      </div>
+
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Building Section & Elevation Design" data-images='["images/eng-5.jpg"]'
+           data-aos="fade-up" data-aos-delay="340" role="button" tabindex="0" aria-label="Open Building Section & Elevation Design">
+        <div class="gallery-photo-frame"><img src="images/eng-5.jpg" alt="Building Section & Elevation Design" loading="lazy"></div>
+        <span class="gallery-caption">Building Section & Elevation Design</span>
+      </div>
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Building Section & Elevation Design" data-images='["ENG6.JPG"]'
+           data-aos="fade-up" data-aos-delay="340" role="button" tabindex="0" aria-label="Open Building Section & Elevation Design">
+        <div class="gallery-photo-frame"><img src="ENG6.JPG" alt="Building Section & Elevation Design" loading="lazy"></div>
+        <span class="gallery-caption">Building Section & Elevation Design</span>
+      </div>
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Building Section & Elevation Design" data-images='["ENG7.JPG"]'
+           data-aos="fade-up" data-aos-delay="340" role="button" tabindex="0" aria-label="Open Building Section & Elevation Design">
+        <div class="gallery-photo-frame"><img src="ENG7.JPG" alt="Building Section & Elevation Design" loading="lazy"></div>
+        <span class="gallery-caption">Building Section & Elevation Design</span>
+      </div>
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Building Section & Elevation Design" data-images='["ENG8.JPG"]'
+           data-aos="fade-up" data-aos-delay="340" role="button" tabindex="0" aria-label="Open Building Section & Elevation Design">
+        <div class="gallery-photo-frame"><img src="ENG8.JPG" alt="Building Section & Elevation Design" loading="lazy"></div>
+        <span class="gallery-caption">Building Section & Elevation Design</span>
+      </div>
+      <div class="gallery-item gallery-item-photo" data-category="Engineering Projects" data-title="Building Section & Elevation Design" data-images='["ENG9.JPG"]'
+           data-aos="fade-up" data-aos-delay="340" role="button" tabindex="0" aria-label="Open Building Section & Elevation Design">
+        <div class="gallery-photo-frame"><img src="ENG9.JPG" alt="Building Section & Elevation Design" loading="lazy"></div>
+        <span class="gallery-caption">Building Section & Elevation Design</span>
+      </div>
+
+      <div class="gallery-item gallery-item-multi" data-category="Engineering Projects" data-title="Engineering Project Highlights"
+           data-images='["images/eng-1.jpg","images/eng-2.jpg","images/eng-3.jpg","images/eng-4.jpg","images/eng-5.jpg"]'
+           data-aos="fade-up" data-aos-delay="360" role="button" tabindex="0" aria-label="Open Engineering Project Highlights gallery">
+        <div class="gallery-multi-preview">
+          <div class="gm-tile"><img src="images/eng-1.jpg" alt="3D architectural model" loading="lazy"></div>
+          <div class="gm-tile"><img src="images/eng-2.jpg" alt="Factory floor plan" loading="lazy"></div>
+          <div class="gm-tile"><img src="images/eng-3.jpg" alt="Water factory building rendering" loading="lazy"></div>
+          <div class="gm-tile"><img src="eng6.jpg" alt="Water factory building rendering" loading="lazy"></div>
+          <div class="gm-tile"><img src="ENG7.JPG" alt="Water factory building rendering" loading="lazy"></div>
+          <div class="gm-tile"><img src="ENG8.JPG" alt="Water factory building rendering" loading="lazy"></div>
+          <div class="gm-tile"><img src="ENG9.JPG" alt="Water factory building rendering" loading="lazy"></div>
+          <div class="gm-tile gm-tile-more"><img src="images/eng-4.jpg" alt="Residential housing project rendering" loading="lazy"><span class="gm-more-badge">+2</span></div>
+        </div>
+        <span class="gallery-caption">Engineering Project Highlights<small>5 photos</small></span>
+      </div>
+
+      <div class="gallery-item gallery-item-multi" data-category="Training Sessions" data-title="Training Session Moments"
+           data-images='["images/train-1.jpg","images/train-2.jpg","images/train-3.jpg","images/train-4.jpg","images/train-5.jpg","images/train-6.jpg"]'
+           data-aos="fade-up" data-aos-delay="390" role="button" tabindex="0" aria-label="Open Training Session Moments gallery">
+        <div class="gallery-multi-preview">
+          <div class="gm-tile"><img src="images/train-1.jpg" alt="Training session photo 1" loading="lazy"></div>
+          <div class="gm-tile"><img src="images/train-2.jpg" alt="Training session photo 2" loading="lazy"></div>
+          <div class="gm-tile"><img src="images/train-3.jpg" alt="Training session photo 3" loading="lazy"></div>
+          <div class="gm-tile gm-tile-more"><img src="images/train-4.jpg" alt="Training session photo 4" loading="lazy"><span class="gm-more-badge">+2</span></div>
+        </div>
+        <span class="gallery-caption">Training Session Moments<small>6 photos</small></span>
+      </div>
+
+      <div class="gallery-item gallery-item-multi" data-category="Student Events" data-title="Student Event Snapshots"
+           data-images='["images/student-01.jpg","images/student-02.jpg"]'
+           data-aos="fade-up" data-aos-delay="420" role="button" tabindex="0" aria-label="Open Student Event Snapshots gallery">
+        <div class="gallery-multi-preview gm-preview-2">
+          <div class="gm-tile"><img src="images/student-01.jpg" alt="Student event photo 1" loading="lazy"></div>
+          <div class="gm-tile"><img src="images/student-02.jpg" alt="Student event photo 2" loading="lazy"></div>
+        </div>
+        <span class="gallery-caption">Student Event Snapshots<small>2 photos</small></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-box">
+    <button class="lightbox-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <i class="fa-solid fa-image lightbox-icon"></i>
+    <h3 class="lightbox-title">Gallery item</h3>
+    <p style="color:rgba(255,255,255,0.7);margin:0;">Photo coming soon - full-resolution gallery images will be added here.</p>
+  </div>
+</div>
+
+<div class="gm-lightbox" id="gmLightbox">
+  <button class="gm-lightbox-close" id="gmLightboxClose" aria-label="Close">&times;</button>
+  <button class="gm-lightbox-nav gm-lightbox-prev" id="gmPrev" aria-label="Previous image">&#10094;</button>
+  <img class="gm-lightbox-img" id="gmLightboxImg" src="" alt="">
+  <button class="gm-lightbox-nav gm-lightbox-next" id="gmNext" aria-label="Next image">&#10095;</button>
+  <div class="gm-lightbox-caption" id="gmLightboxCaption"></div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col footer-about">
+      <a href="index.html" class="brand brand-footer">
+        <img src="images/logo.jpg" alt="Scholars HUB logo" class="brand-logo">
+        <span class="brand-name">Scholars <em>HUB</em></span>
+      </a>
+      <p>Scholars HUB equips students and young professionals with entrepreneurial skills, leadership, mentorship, and innovation opportunities that turn education into enterprise.</p>
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@scholarshub_gh" target="_blank" rel="noopener" aria-label="Scholars HUB on TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="mailto:scholarshub26@outlook.com" aria-label="Email Scholars HUB"><i class="fa-solid fa-envelope"></i></a>
+        <a href="tel:+233598712336" aria-label="Call Scholars HUB"><i class="fa-solid fa-phone"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog / News</a></li>
+        <li><a href="book-service.html">Book a Service</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Entrepreneurship Education</a></li>
+        <li><a href="services.html">Digital Skills Training</a></li>
+        <li><a href="services.html">Career Development</a></li>
+        <li><a href="services.html">Building &amp; Construction</a></li>
+        <li><a href="services.html">Robotics &amp; Automation</a></li>
+        <li><a href="services.html">View all services &rarr;</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-phone"></i> <a href="tel:+233598712336">0598712336</a> &nbsp;/&nbsp; <a href="tel:+233256775066">0256775066</a></li>
+        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:scholarshub26@outlook.com">scholarshub26@outlook.com</a></li>
+        <li><i class="fa-solid fa-location-dot"></i> Academy of Christ the King, Cape Coast &mdash; near FELLAVAN K Enterprise</li>
+      </ul>
+      <h4 class="hours-heading">Working Hours</h4>
+      <ul class="footer-hours">
+        <li><span>Mon &ndash; Fri</span><span>8:00 AM &ndash; 5:00 PM</span></li>
+        <li><span>Saturday</span><span>By Appointment</span></li>
+        <li><span>Sunday</span><span>Closed</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> Scholars HUB. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+  (function(){
+    var gmImages = [], gmIndex = 0, gmTitle = '';
+    var gmLightbox = document.getElementById('gmLightbox');
+    var gmImg = document.getElementById('gmLightboxImg');
+    var gmCaption = document.getElementById('gmLightboxCaption');
+
+    function updateGm(){
+      gmImg.src = gmImages[gmIndex];
+      gmCaption.textContent = gmTitle + ' — ' + (gmIndex + 1) + ' / ' + gmImages.length;
+    }
+    function openGm(item){
+      try { gmImages = JSON.parse(item.getAttribute('data-images')); } catch(e){ gmImages = []; }
+      if(!gmImages.length) return;
+      gmTitle = item.getAttribute('data-title') || '';
+      gmIndex = 0;
+      updateGm();
+      gmLightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeGm(){
+      gmLightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    function prevGm(){ gmIndex = (gmIndex - 1 + gmImages.length) % gmImages.length; updateGm(); }
+    function nextGm(){ gmIndex = (gmIndex + 1) % gmImages.length; updateGm(); }
+
+    document.querySelectorAll('.gallery-item-multi, .gallery-item-photo').forEach(function(item){
+      item.addEventListener('click', function(){ openGm(item); });
+      item.addEventListener('keypress', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openGm(item); }
+      });
+    });
+
+    document.getElementById('gmLightboxClose').addEventListener('click', closeGm);
+    document.getElementById('gmPrev').addEventListener('click', function(e){ e.stopPropagation(); prevGm(); });
+    document.getElementById('gmNext').addEventListener('click', function(e){ e.stopPropagation(); nextGm(); });
+    gmLightbox.addEventListener('click', function(e){ if(e.target === gmLightbox) closeGm(); });
+    document.addEventListener('keydown', function(e){
+      if(!gmLightbox.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeGm();
+      if(e.key === 'ArrowLeft') prevGm();
+      if(e.key === 'ArrowRight') nextGm();
+    });
+  })();
+</script>
+
+<script type="module">
+  // Firebase (client-side) - used here for Analytics only.
+  // Firestore writes for the contact and booking forms go through
+  // the Flask backend (see /api/contact and /api/book-service in
+  // app.py), using the Firebase Admin SDK server-side - not this
+  // client SDK - so form data never depends on this script.
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9dFM00Q0vbbzgElJW2iXYfgsq-qI9rn4",
+    authDomain: "chatbot-e1297.firebaseapp.com",
+    databaseURL: "https://chatbot-e1297-default-rtdb.firebaseio.com",
+    projectId: "chatbot-e1297",
+    storageBucket: "chatbot-e1297.firebasestorage.app",
+    messagingSenderId: "538304203055",
+    appId: "1:538304203055:web:c42821beb1460073e6b9da",
+    measurementId: "G-LW7X688MGL"
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  getAnalytics(firebaseApp);
+</script>
+
+</body>
+</html>
