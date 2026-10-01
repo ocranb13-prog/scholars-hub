@@ -1,12 +1,7 @@
-/* Scholars HUB — main.js */
-
-// The Flask backend (app.py) can run on a different origin than this
-// static frontend (e.g. this frontend on GitHub Pages, backend on
-// Render/Railway/PythonAnywhere). Change this one line to point the
-// contact + booking forms at wherever the Flask API is deployed.
-// For local testing, run: cd backend && python3 app.py  (defaults to
-// http://127.0.0.1:5000) and leave this as-is.
-const API_BASE_URL = window.SCHOLARS_HUB_API_BASE || 'http://127.0.0.1:5000';
+/* Scholars HUB — main.js
+ * Note: the Contact and Booking forms are handled by js/firebase-forms.js
+ * (they save directly to Firestore), so there is no form/API code here.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -43,49 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // Generic form submit handler -> posts JSON to a Flask API endpoint
-  const handleFormSubmit = (formId, endpoint) => {
-    const form = document.getElementById(formId);
-    if (!form) return;
-    const statusBox = form.querySelector('.form-status');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-      if (statusBox) { statusBox.className = 'form-status'; statusBox.textContent = ''; }
-
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await res.json();
-
-        if (statusBox) {
-          statusBox.classList.add(result.success ? 'is-success' : 'is-error');
-          statusBox.textContent = result.success
-            ? result.message
-            : (result.error || 'Something went wrong. Please try again.');
-        }
-        if (result.success) form.reset();
-      } catch (err) {
-        if (statusBox) {
-          statusBox.classList.add('is-error');
-          statusBox.textContent = 'Network error - please check your connection and try again.';
-        }
-      } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.label || 'Submit'; }
-      }
-    });
-  };
-
-  handleFormSubmit('contactForm', `${API_BASE_URL}/api/contact`);
-  handleFormSubmit('bookingForm', `${API_BASE_URL}/api/book-service`);
 
   // Project filter buttons
   const filterButtons = document.querySelectorAll('.filter-btn');
