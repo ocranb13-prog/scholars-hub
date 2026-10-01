@@ -234,29 +234,7 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="js/main.js"></script>
 
-<script type="module">
-  // Firebase (client-side) - used here for Analytics only.
-  // Firestore writes for the contact and booking forms go through
-  // the Flask backend (see /api/contact and /api/book-service in
-  // app.py), using the Firebase Admin SDK server-side - not this
-  // client SDK - so form data never depends on this script.
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyA9dFM00Q0vbbzgElJW2iXYfgsq-qI9rn4",
-    authDomain: "chatbot-e1297.firebaseapp.com",
-    databaseURL: "https://chatbot-e1297-default-rtdb.firebaseio.com",
-    projectId: "chatbot-e1297",
-    storageBucket: "chatbot-e1297.firebasestorage.app",
-    messagingSenderId: "538304203055",
-    appId: "1:538304203055:web:c42821beb1460073e6b9da",
-    measurementId: "G-LW7X688MGL"
-  };
-
-  const firebaseApp = initializeApp(firebaseConfig);
-  getAnalytics(firebaseApp);
-</script>
+<script type="module" src="js/firebase-forms.js"></script>
 
 </body>
 </html>
